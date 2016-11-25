@@ -1,0 +1,9 @@
+c:\users\marcin\documents\visual studio 2015\Projects\RGBController\RGBController\bin\Debug\RGBController.exe.config
+c:\users\marcin\documents\visual studio 2015\Projects\RGBController\RGBController\obj\Debug\RGBController.csprojResolveAssemblyReference.cache
+c:\users\marcin\documents\visual studio 2015\Projects\RGBController\RGBController\obj\Debug\RGBController.Form1.resources
+c:\users\marcin\documents\visual studio 2015\Projects\RGBController\RGBController\obj\Debug\RGBController.Properties.Resources.resources
+c:\users\marcin\documents\visual studio 2015\Projects\RGBController\RGBController\obj\Debug\RGBController.csproj.GenerateResource.Cache
+c:\users\marcin\documents\visual studio 2015\Projects\RGBController\RGBController\bin\Debug\RGBController.exe
+c:\users\marcin\documents\visual studio 2015\Projects\RGBController\RGBController\bin\Debug\RGBController.pdb
+c:\users\marcin\documents\visual studio 2015\Projects\RGBController\RGBController\obj\Debug\RGBController.exe
+c:\users\marcin\documents\visual studio 2015\Projects\RGBController\RGBController\obj\Debug\RGBController.pdb
