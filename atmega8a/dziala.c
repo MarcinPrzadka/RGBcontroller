@@ -60,19 +60,19 @@ int main(void){
 	sei();				// odblokowanie globalne przerwañ
 	uint8_t i;			// definicja zmiennej i na potrzeby pêtli for()
 
- 	pwmR=150;
-	pwmG=200;
-	pwmB=250;
+ 	pwmR=0;
+	pwmG=0;
+	pwmB=0;
 
 	while(1){
 		data = USART_Receive();
 		USART_Transmit(data);
-		if(data == '1' ) pwmR=pwmR+5;
-		if(data == '4' ) pwmR=pwmR-5;
-		if(data == '2' ) pwmG=pwmG+5;
-		if(data == '5' ) pwmG=pwmG-5;
-		if(data == '3' ) pwmB=pwmB+5;
-		if(data == '6' ) pwmB=pwmB-5;
+		if(data == '1' ) { if(pwmR != 255) pwmR=pwmR+5;}
+		if(data == '4' ) { if(pwmR != 0) pwmR=pwmR-5; }
+		if(data == '2' ) { if(pwmG != 255) pwmG=pwmG+5;}
+		if(data == '5' ) { if(pwmG != 0) pwmG=pwmG-5; }
+		if(data == '3' ) { if(pwmB != 255) pwmB=pwmB+5;}
+		if(data == '6' ) { if(pwmB != 0) pwmB=pwmB-5; }
 		;
 		}
 }

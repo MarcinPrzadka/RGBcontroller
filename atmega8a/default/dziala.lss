@@ -3,25 +3,25 @@ dziala.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         00000176  00000000  00000000  00000074  2**1
+  0 .text         000001a6  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .bss          00000004  00800060  00800060  000001ea  2**0
+  1 .bss          00000004  00800060  00800060  0000021a  2**0
                   ALLOC
-  2 .debug_aranges 00000020  00000000  00000000  000001ea  2**0
+  2 .debug_aranges 00000020  00000000  00000000  0000021a  2**0
                   CONTENTS, READONLY, DEBUGGING
-  3 .debug_pubnames 00000079  00000000  00000000  0000020a  2**0
+  3 .debug_pubnames 00000079  00000000  00000000  0000023a  2**0
                   CONTENTS, READONLY, DEBUGGING
-  4 .debug_info   000001de  00000000  00000000  00000283  2**0
+  4 .debug_info   000001de  00000000  00000000  000002b3  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_abbrev 00000141  00000000  00000000  00000461  2**0
+  5 .debug_abbrev 00000141  00000000  00000000  00000491  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_line   0000021a  00000000  00000000  000005a2  2**0
+  6 .debug_line   0000021a  00000000  00000000  000005d2  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_frame  00000060  00000000  00000000  000007bc  2**2
+  7 .debug_frame  00000060  00000000  00000000  000007ec  2**2
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_str    000000dd  00000000  00000000  0000081c  2**0
+  8 .debug_str    000000dd  00000000  00000000  0000084c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_loc    00000062  00000000  00000000  000008f9  2**0
+  9 .debug_loc    00000062  00000000  00000000  00000929  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -69,7 +69,7 @@ Disassembly of section .text:
   3e:	b1 07       	cpc	r27, r17
   40:	e1 f7       	brne	.-8      	; 0x3a <.do_clear_bss_loop>
   42:	39 d0       	rcall	.+114    	; 0xb6 <main>
-  44:	96 c0       	rjmp	.+300    	; 0x172 <_exit>
+  44:	ae c0       	rjmp	.+348    	; 0x1a2 <_exit>
 
 00000046 <__bad_interrupt>:
   46:	dc cf       	rjmp	.-72     	; 0x0 <__vectors>
@@ -234,81 +234,98 @@ void USART_Init( uint16_t baud){
  102:	78 94       	sei
 	uint8_t i;			// definicja zmiennej i na potrzeby pêtli for()
 
- 	pwmR=150;
- 104:	86 e9       	ldi	r24, 0x96	; 150
- 106:	80 93 62 00 	sts	0x0062, r24
-	pwmG=200;
- 10a:	88 ec       	ldi	r24, 0xC8	; 200
- 10c:	80 93 63 00 	sts	0x0063, r24
-	pwmB=250;
- 110:	8a ef       	ldi	r24, 0xFA	; 250
- 112:	80 93 61 00 	sts	0x0061, r24
+ 	pwmR=0;
+ 104:	10 92 62 00 	sts	0x0062, r1
+	pwmG=0;
+ 108:	10 92 63 00 	sts	0x0063, r1
+	pwmB=0;
+ 10c:	10 92 61 00 	sts	0x0061, r1
 	while( !(UCSRA & (1<<UDRE)) );
 	UDR = buflen;
 }
 	
 unsigned char USART_Receive( void ){
    while( !(UCSRA & (1<<RXC)) );
- 116:	5f 9b       	sbis	0x0b, 7	; 11
- 118:	fe cf       	rjmp	.-4      	; 0x116 <main+0x60>
+ 110:	5f 9b       	sbis	0x0b, 7	; 11
+ 112:	fe cf       	rjmp	.-4      	; 0x110 <main+0x5a>
    return UDR;
- 11a:	8c b1       	in	r24, 0x0c	; 12
+ 114:	8c b1       	in	r24, 0x0c	; 12
 	UCSRB = (1<<RXEN)|(1<<TXEN);
 	UCSRC = (1<<URSEL)|(3<<UCSZ0);
 }
 
 void USART_Transmit( char buflen) {
 	while( !(UCSRA & (1<<UDRE)) );
- 11c:	5d 9b       	sbis	0x0b, 5	; 11
- 11e:	fe cf       	rjmp	.-4      	; 0x11c <main+0x66>
+ 116:	5d 9b       	sbis	0x0b, 5	; 11
+ 118:	fe cf       	rjmp	.-4      	; 0x116 <main+0x60>
 	UDR = buflen;
- 120:	8c b9       	out	0x0c, r24	; 12
-	pwmB=250;
+ 11a:	8c b9       	out	0x0c, r24	; 12
+	pwmB=0;
 
 	while(1){
 		data = USART_Receive();
 		USART_Transmit(data);
-		if(data == '1' ) pwmR=pwmR+5;
- 122:	81 33       	cpi	r24, 0x31	; 49
- 124:	21 f4       	brne	.+8      	; 0x12e <main+0x78>
- 126:	80 91 62 00 	lds	r24, 0x0062
- 12a:	8b 5f       	subi	r24, 0xFB	; 251
- 12c:	05 c0       	rjmp	.+10     	; 0x138 <main+0x82>
-		if(data == '4' ) pwmR=pwmR-5;
- 12e:	84 33       	cpi	r24, 0x34	; 52
- 130:	31 f4       	brne	.+12     	; 0x13e <main+0x88>
- 132:	80 91 62 00 	lds	r24, 0x0062
- 136:	85 50       	subi	r24, 0x05	; 5
- 138:	80 93 62 00 	sts	0x0062, r24
- 13c:	ec cf       	rjmp	.-40     	; 0x116 <main+0x60>
-		if(data == '2' ) pwmG=pwmG+5;
- 13e:	82 33       	cpi	r24, 0x32	; 50
- 140:	21 f4       	brne	.+8      	; 0x14a <main+0x94>
- 142:	80 91 63 00 	lds	r24, 0x0063
- 146:	8b 5f       	subi	r24, 0xFB	; 251
- 148:	05 c0       	rjmp	.+10     	; 0x154 <main+0x9e>
-		if(data == '5' ) pwmG=pwmG-5;
- 14a:	85 33       	cpi	r24, 0x35	; 53
- 14c:	31 f4       	brne	.+12     	; 0x15a <main+0xa4>
- 14e:	80 91 63 00 	lds	r24, 0x0063
- 152:	85 50       	subi	r24, 0x05	; 5
- 154:	80 93 63 00 	sts	0x0063, r24
- 158:	de cf       	rjmp	.-68     	; 0x116 <main+0x60>
-		if(data == '3' ) pwmB=pwmB+5;
- 15a:	83 33       	cpi	r24, 0x33	; 51
- 15c:	21 f4       	brne	.+8      	; 0x166 <main+0xb0>
- 15e:	80 91 61 00 	lds	r24, 0x0061
- 162:	8b 5f       	subi	r24, 0xFB	; 251
- 164:	d6 cf       	rjmp	.-84     	; 0x112 <main+0x5c>
-		if(data == '6' ) pwmB=pwmB-5;
- 166:	86 33       	cpi	r24, 0x36	; 54
- 168:	b1 f6       	brne	.-84     	; 0x116 <main+0x60>
- 16a:	80 91 61 00 	lds	r24, 0x0061
- 16e:	85 50       	subi	r24, 0x05	; 5
- 170:	d0 cf       	rjmp	.-96     	; 0x112 <main+0x5c>
+		if(data == '1' ) { if(pwmR != 255) pwmR=pwmR+5;}
+ 11c:	81 33       	cpi	r24, 0x31	; 49
+ 11e:	41 f4       	brne	.+16     	; 0x130 <main+0x7a>
+ 120:	80 91 62 00 	lds	r24, 0x0062
+ 124:	8f 3f       	cpi	r24, 0xFF	; 255
+ 126:	a1 f3       	breq	.-24     	; 0x110 <main+0x5a>
+ 128:	80 91 62 00 	lds	r24, 0x0062
+ 12c:	8b 5f       	subi	r24, 0xFB	; 251
+ 12e:	09 c0       	rjmp	.+18     	; 0x142 <main+0x8c>
+		if(data == '4' ) { if(pwmR != 0) pwmR=pwmR-5; }
+ 130:	84 33       	cpi	r24, 0x34	; 52
+ 132:	51 f4       	brne	.+20     	; 0x148 <main+0x92>
+ 134:	80 91 62 00 	lds	r24, 0x0062
+ 138:	88 23       	and	r24, r24
+ 13a:	51 f3       	breq	.-44     	; 0x110 <main+0x5a>
+ 13c:	80 91 62 00 	lds	r24, 0x0062
+ 140:	85 50       	subi	r24, 0x05	; 5
+ 142:	80 93 62 00 	sts	0x0062, r24
+ 146:	e4 cf       	rjmp	.-56     	; 0x110 <main+0x5a>
+		if(data == '2' ) { if(pwmG != 255) pwmG=pwmG+5;}
+ 148:	82 33       	cpi	r24, 0x32	; 50
+ 14a:	41 f4       	brne	.+16     	; 0x15c <main+0xa6>
+ 14c:	80 91 63 00 	lds	r24, 0x0063
+ 150:	8f 3f       	cpi	r24, 0xFF	; 255
+ 152:	f1 f2       	breq	.-68     	; 0x110 <main+0x5a>
+ 154:	80 91 63 00 	lds	r24, 0x0063
+ 158:	8b 5f       	subi	r24, 0xFB	; 251
+ 15a:	09 c0       	rjmp	.+18     	; 0x16e <main+0xb8>
+		if(data == '5' ) { if(pwmG != 0) pwmG=pwmG-5; }
+ 15c:	85 33       	cpi	r24, 0x35	; 53
+ 15e:	51 f4       	brne	.+20     	; 0x174 <main+0xbe>
+ 160:	80 91 63 00 	lds	r24, 0x0063
+ 164:	88 23       	and	r24, r24
+ 166:	a1 f2       	breq	.-88     	; 0x110 <main+0x5a>
+ 168:	80 91 63 00 	lds	r24, 0x0063
+ 16c:	85 50       	subi	r24, 0x05	; 5
+ 16e:	80 93 63 00 	sts	0x0063, r24
+ 172:	ce cf       	rjmp	.-100    	; 0x110 <main+0x5a>
+		if(data == '3' ) { if(pwmB != 255) pwmB=pwmB+5;}
+ 174:	83 33       	cpi	r24, 0x33	; 51
+ 176:	41 f4       	brne	.+16     	; 0x188 <main+0xd2>
+ 178:	80 91 61 00 	lds	r24, 0x0061
+ 17c:	8f 3f       	cpi	r24, 0xFF	; 255
+ 17e:	41 f2       	breq	.-112    	; 0x110 <main+0x5a>
+ 180:	80 91 61 00 	lds	r24, 0x0061
+ 184:	8b 5f       	subi	r24, 0xFB	; 251
+ 186:	0a c0       	rjmp	.+20     	; 0x19c <main+0xe6>
+		if(data == '6' ) { if(pwmB != 0) pwmB=pwmB-5; }
+ 188:	86 33       	cpi	r24, 0x36	; 54
+ 18a:	11 f6       	brne	.-124    	; 0x110 <main+0x5a>
+ 18c:	80 91 61 00 	lds	r24, 0x0061
+ 190:	88 23       	and	r24, r24
+ 192:	09 f4       	brne	.+2      	; 0x196 <main+0xe0>
+ 194:	bd cf       	rjmp	.-134    	; 0x110 <main+0x5a>
+ 196:	80 91 61 00 	lds	r24, 0x0061
+ 19a:	85 50       	subi	r24, 0x05	; 5
+ 19c:	80 93 61 00 	sts	0x0061, r24
+ 1a0:	b7 cf       	rjmp	.-146    	; 0x110 <main+0x5a>
 
-00000172 <_exit>:
- 172:	f8 94       	cli
+000001a2 <_exit>:
+ 1a2:	f8 94       	cli
 
-00000174 <__stop_program>:
- 174:	ff cf       	rjmp	.-2      	; 0x174 <__stop_program>
+000001a4 <__stop_program>:
+ 1a4:	ff cf       	rjmp	.-2      	; 0x1a4 <__stop_program>
