@@ -3,21 +3,10 @@
 #define BAUD 9600
 #define MYUBRR ((F_CPU+BAUD*8UL) / (16UL*BAUD)-1) 
 
-#define LED_PIN_R (1<<PC0)
-#define LED_PIN_G (1<<PC1)
-#define LED_PIN_B (1<<PC2)
-
-#define LED_ON_R PORTC &= ~LED_PIN_R
-#define LED_OFF_R PORTC |= LED_PIN_R
-
-#define LED_ON_G PORTC &= ~LED_PIN_G
-#define LED_OFF_G PORTC |= LED_PIN_G
-
-#define LED_ON_B PORTC &= ~LED_PIN_B
-#define LED_OFF_B PORTC |= LED_PIN_B
-
 #include <avr/io.h>
 #include <util/delay.h>
+#include <avr/interrupt.h>
+
 
 void USART_Init( uint16_t baud){
 	UBRRH = (uint16_t)(baud>>8);
@@ -36,29 +25,55 @@ unsigned char USART_Receive( void ){
    return UDR;
 }
 
-int main(void){
-	USART_Init(MYUBRR);
-	unsigned char data;
+volatile uint8_t pwmR, pwmG, pwmB;
 
-	DDRC |= LED_PIN_R;
-	DDRC |= LED_PIN_G;
-	DDRC |= LED_PIN_B;
-	LED_OFF_R;
-	LED_OFF_G;
-	LED_OFF_B;
+ISR( TIMER2_COMP_vect ) // cia³o procedury obs³ugi przerwania Compare Match Timera2
+{
+	static uint8_t cnt; // definicja naszego licznika PWM
+
+	// bezpoœrednie sterowanie wyjœciami kana³ów PWM
+	if(cnt>=pwmR) PORTC |= (1<<PC0); else PORTC &= ~(1<<PC0);
+	if(cnt>=pwmG) PORTC |= (1<<PC1); else PORTC &= ~(1<<PC1);
+	if(cnt>=pwmB) PORTC |= (1<<PC2); else PORTC &= ~(1<<PC2);
+	cnt++;	// zwiêkszanie licznika o 1
+}
+
+
+int main(void){
+
+	USART_Init(MYUBRR);
+	unsigned char data; 
+
+	//***** SPRZÊTOWY PWM - 1 KANA£ OC0 (PB2) *******
+	DDRB |= (1<<PB2); // ustawienie koñcówki OC0 (PB2) sprzêtowy PWM jako WYJŒCIE
+	TCCR0 |= (1<<WGM10)|(1<<WGM12);		// tryb Fast PWM
+	TCCR0 |= (1<<COM21);				// clear at TOP
+	TCCR0 |= (1<<CS00);					// preskaler = 1
+	OCR1A=255;							// wygaszenie diody w kanale PWM
+	DDRC |= (1<<PC0)|(1<<PC1)|(1<<PC2); // ustawienie pinów kana³ów programowych PWM jako WYJŒCIA
+	PORTC |= (1<<PC0)|(1<<PC1)|(1<<PC2); // wy³¹czenie diod LED pod³¹czonych katodami do wyjœæ
+	
+	TCCR2 |= (1<<WGM21);	// tryb  CTC
+	TCCR2 |= (1<<CS20);		// preskaler = 1
+	OCR2 = 199;				// dodatkowy podzia³ czêsttotliwoœci przez 200
+	TIMSK |= (1<<OCIE2);	// zezwolenie na przerwanie CompareMatch
+	sei();				// odblokowanie globalne przerwañ
+	uint8_t i;			// definicja zmiennej i na potrzeby pêtli for()
+
+ 	pwmR=150;
+	pwmG=200;
+	pwmB=250;
 
 	while(1){
 		data = USART_Receive();
 		USART_Transmit(data);
-		if(data == '1' ) LED_ON_R;
-		if(data == '4' ) LED_OFF_R;
-		if(data == '2' ) LED_ON_G;
-		if(data == '5' ) LED_OFF_G;
-		if(data == '3' ) LED_ON_B;
-		if(data == '6' ) LED_OFF_B;
-	//	LED_TOG;
-	//	_delay_ms(10000);
-	}
+		if(data == '1' ) pwmR=pwmR+5;
+		if(data == '4' ) pwmR=pwmR-5;
+		if(data == '2' ) pwmG=pwmG+5;
+		if(data == '5' ) pwmG=pwmG-5;
+		if(data == '3' ) pwmB=pwmB+5;
+		if(data == '6' ) pwmB=pwmB-5;
+		;
+		}
 }
-
 

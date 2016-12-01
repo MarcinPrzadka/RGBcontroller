@@ -4,7 +4,7 @@
 
 ## General Flags
 PROJECT = dziala
-MCU = atmega32
+MCU = atmega8
 TARGET = dziala.elf
 CC = avr-gcc
 
