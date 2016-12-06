@@ -32,20 +32,32 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.buttonRedOn = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.serialPort = new System.IO.Ports.SerialPort(this.components);
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
+            this.buttonRedOff = new System.Windows.Forms.Button();
+            this.buttonGreenOn = new System.Windows.Forms.Button();
+            this.buttonGreenOff = new System.Windows.Forms.Button();
+            this.buttonBlueOn = new System.Windows.Forms.Button();
+            this.buttonBlueOff = new System.Windows.Forms.Button();
+            this.trackBarRed = new System.Windows.Forms.TrackBar();
+            this.trackBarGreen = new System.Windows.Forms.TrackBar();
+            this.trackBarBlue = new System.Windows.Forms.TrackBar();
+            this.labelRed = new System.Windows.Forms.Label();
+            this.labelGreen = new System.Windows.Forms.Label();
+            this.labelBlue = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarRed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarGreen)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarBlue)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(88, 33);
+            this.button1.Location = new System.Drawing.Point(243, 6);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
@@ -55,7 +67,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 33);
+            this.button2.Location = new System.Drawing.Point(169, 6);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(56, 23);
             this.button2.TabIndex = 1;
@@ -63,15 +75,15 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button3
+            // buttonRedOn
             // 
-            this.button3.Location = new System.Drawing.Point(13, 77);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(56, 23);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Red +";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.buttonRedOn.Location = new System.Drawing.Point(13, 68);
+            this.buttonRedOn.Name = "buttonRedOn";
+            this.buttonRedOn.Size = new System.Drawing.Size(32, 23);
+            this.buttonRedOn.TabIndex = 2;
+            this.buttonRedOn.Text = "On";
+            this.buttonRedOn.UseVisualStyleBackColor = true;
+            this.buttonRedOn.Click += new System.EventHandler(this.button3_Click);
             // 
             // comboBox1
             // 
@@ -94,70 +106,163 @@
             // 
             this.serialPort.PortName = "comboBox1.Text";
             // 
-            // button4
+            // buttonRedOff
             // 
-            this.button4.Location = new System.Drawing.Point(13, 106);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(56, 23);
-            this.button4.TabIndex = 8;
-            this.button4.Text = "Red -";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.buttonRedOff.Location = new System.Drawing.Point(51, 68);
+            this.buttonRedOff.Name = "buttonRedOff";
+            this.buttonRedOff.Size = new System.Drawing.Size(32, 23);
+            this.buttonRedOff.TabIndex = 8;
+            this.buttonRedOff.Text = "Off";
+            this.buttonRedOff.UseVisualStyleBackColor = true;
+            this.buttonRedOff.Click += new System.EventHandler(this.button4_Click);
             // 
-            // button5
+            // buttonGreenOn
             // 
-            this.button5.Location = new System.Drawing.Point(88, 77);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(56, 23);
-            this.button5.TabIndex = 9;
-            this.button5.Text = "Green +";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.buttonGreenOn.Location = new System.Drawing.Point(107, 68);
+            this.buttonGreenOn.Name = "buttonGreenOn";
+            this.buttonGreenOn.Size = new System.Drawing.Size(32, 23);
+            this.buttonGreenOn.TabIndex = 9;
+            this.buttonGreenOn.Text = "On";
+            this.buttonGreenOn.UseVisualStyleBackColor = true;
+            this.buttonGreenOn.Click += new System.EventHandler(this.button5_Click);
             // 
-            // button6
+            // buttonGreenOff
             // 
-            this.button6.Location = new System.Drawing.Point(88, 106);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(56, 23);
-            this.button6.TabIndex = 10;
-            this.button6.Text = "Green -";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.buttonGreenOff.Location = new System.Drawing.Point(143, 68);
+            this.buttonGreenOff.Name = "buttonGreenOff";
+            this.buttonGreenOff.Size = new System.Drawing.Size(32, 23);
+            this.buttonGreenOff.TabIndex = 10;
+            this.buttonGreenOff.Text = "Off";
+            this.buttonGreenOff.UseVisualStyleBackColor = true;
+            this.buttonGreenOff.Click += new System.EventHandler(this.button6_Click);
             // 
-            // button7
+            // buttonBlueOn
             // 
-            this.button7.Location = new System.Drawing.Point(159, 77);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(56, 23);
-            this.button7.TabIndex = 11;
-            this.button7.Text = "Blue +";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.buttonBlueOn.Location = new System.Drawing.Point(195, 68);
+            this.buttonBlueOn.Name = "buttonBlueOn";
+            this.buttonBlueOn.Size = new System.Drawing.Size(32, 23);
+            this.buttonBlueOn.TabIndex = 11;
+            this.buttonBlueOn.Text = "On";
+            this.buttonBlueOn.UseVisualStyleBackColor = true;
+            this.buttonBlueOn.Click += new System.EventHandler(this.button7_Click);
             // 
-            // button8
+            // buttonBlueOff
             // 
-            this.button8.Location = new System.Drawing.Point(159, 106);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(56, 23);
-            this.button8.TabIndex = 12;
-            this.button8.Text = "Blue -";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
+            this.buttonBlueOff.Location = new System.Drawing.Point(233, 68);
+            this.buttonBlueOff.Name = "buttonBlueOff";
+            this.buttonBlueOff.Size = new System.Drawing.Size(32, 23);
+            this.buttonBlueOff.TabIndex = 12;
+            this.buttonBlueOff.Text = "Off";
+            this.buttonBlueOff.UseVisualStyleBackColor = true;
+            this.buttonBlueOff.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // trackBarRed
+            // 
+            this.trackBarRed.Location = new System.Drawing.Point(30, 97);
+            this.trackBarRed.Maximum = 255;
+            this.trackBarRed.Name = "trackBarRed";
+            this.trackBarRed.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trackBarRed.Size = new System.Drawing.Size(45, 114);
+            this.trackBarRed.TabIndex = 13;
+            this.trackBarRed.Scroll += new System.EventHandler(this.trackBarRed_Scroll);
+            // 
+            // trackBarGreen
+            // 
+            this.trackBarGreen.Location = new System.Drawing.Point(118, 97);
+            this.trackBarGreen.Maximum = 255;
+            this.trackBarGreen.Name = "trackBarGreen";
+            this.trackBarGreen.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trackBarGreen.Size = new System.Drawing.Size(45, 114);
+            this.trackBarGreen.TabIndex = 14;
+            this.trackBarGreen.Scroll += new System.EventHandler(this.trackBarGreen_Scroll);
+            // 
+            // trackBarBlue
+            // 
+            this.trackBarBlue.Location = new System.Drawing.Point(210, 97);
+            this.trackBarBlue.Maximum = 255;
+            this.trackBarBlue.Name = "trackBarBlue";
+            this.trackBarBlue.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trackBarBlue.Size = new System.Drawing.Size(45, 114);
+            this.trackBarBlue.TabIndex = 15;
+            this.trackBarBlue.Scroll += new System.EventHandler(this.trackBarBlue_Scroll);
+            // 
+            // labelRed
+            // 
+            this.labelRed.AutoSize = true;
+            this.labelRed.Location = new System.Drawing.Point(27, 217);
+            this.labelRed.Name = "labelRed";
+            this.labelRed.Size = new System.Drawing.Size(52, 13);
+            this.labelRed.TabIndex = 16;
+            this.labelRed.Text = "Red is : 0";
+            // 
+            // labelGreen
+            // 
+            this.labelGreen.AutoSize = true;
+            this.labelGreen.Location = new System.Drawing.Point(114, 217);
+            this.labelGreen.Name = "labelGreen";
+            this.labelGreen.Size = new System.Drawing.Size(61, 13);
+            this.labelGreen.TabIndex = 17;
+            this.labelGreen.Text = "Green is : 0";
+            // 
+            // labelBlue
+            // 
+            this.labelBlue.AutoSize = true;
+            this.labelBlue.Location = new System.Drawing.Point(207, 217);
+            this.labelBlue.Name = "labelBlue";
+            this.labelBlue.Size = new System.Drawing.Size(53, 13);
+            this.labelBlue.TabIndex = 18;
+            this.labelBlue.Text = "Blue is : 0";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(13, 41);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(62, 13);
+            this.label2.TabIndex = 19;
+            this.label2.Text = " Red value:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(104, 41);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(71, 13);
+            this.label3.TabIndex = 20;
+            this.label3.Text = " Green value:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(192, 41);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(63, 13);
+            this.label4.TabIndex = 21;
+            this.label4.Text = " Blue value:";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(225, 161);
-            this.Controls.Add(this.button8);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
+            this.ClientSize = new System.Drawing.Size(406, 240);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.labelBlue);
+            this.Controls.Add(this.labelGreen);
+            this.Controls.Add(this.labelRed);
+            this.Controls.Add(this.trackBarBlue);
+            this.Controls.Add(this.trackBarGreen);
+            this.Controls.Add(this.trackBarRed);
+            this.Controls.Add(this.buttonBlueOff);
+            this.Controls.Add(this.buttonBlueOn);
+            this.Controls.Add(this.buttonGreenOff);
+            this.Controls.Add(this.buttonGreenOn);
+            this.Controls.Add(this.buttonRedOff);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.buttonRedOn);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -165,6 +270,9 @@
             this.Name = "Form1";
             this.Text = "RGB-Controller";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarRed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarGreen)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarBlue)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -174,15 +282,24 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button buttonRedOn;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
         private System.IO.Ports.SerialPort serialPort;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button buttonRedOff;
+        private System.Windows.Forms.Button buttonGreenOn;
+        private System.Windows.Forms.Button buttonGreenOff;
+        private System.Windows.Forms.Button buttonBlueOn;
+        private System.Windows.Forms.Button buttonBlueOff;
+        private System.Windows.Forms.TrackBar trackBarRed;
+        private System.Windows.Forms.TrackBar trackBarGreen;
+        private System.Windows.Forms.TrackBar trackBarBlue;
+        private System.Windows.Forms.Label labelRed;
+        private System.Windows.Forms.Label labelGreen;
+        private System.Windows.Forms.Label labelBlue;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }
 

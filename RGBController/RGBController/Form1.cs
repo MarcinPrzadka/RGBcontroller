@@ -33,12 +33,12 @@ namespace RGBController
             comboBox1.Enabled = true;   //lista z portami
             button1.Enabled = false;    //przycisk wyślij
             button2.Enabled = true;     //przycisk połącz
-            button3.Enabled = false;    //przycisk rozłącz
-            button4.Enabled = false;
-            button5.Enabled = false;
-            button6.Enabled = false;
-            button7.Enabled = false;
-            button8.Enabled = false;
+            buttonRedOn.Enabled = false;    //przycisk rozłącz
+            buttonRedOff.Enabled = false;
+            buttonGreenOn.Enabled = false;
+            buttonGreenOff.Enabled = false;
+            buttonBlueOn.Enabled = false;
+            buttonBlueOff.Enabled = false;
 
         }
 
@@ -52,12 +52,12 @@ namespace RGBController
                 comboBox1.Enabled = true;  
                 button1.Enabled = true;    
                 button2.Enabled = true;    
-                button3.Enabled = true;    
-                button4.Enabled = true;
-                button5.Enabled = true;
-                button6.Enabled = true;
-                button7.Enabled = true;
-                button8.Enabled = true;
+                buttonRedOn.Enabled = true;    
+                buttonRedOff.Enabled = true;
+                buttonGreenOn.Enabled = true;
+                buttonGreenOff.Enabled = true;
+                buttonBlueOn.Enabled = true;
+                buttonBlueOff.Enabled = true;
             }
             catch
             {
@@ -79,12 +79,12 @@ namespace RGBController
                 comboBox1.Enabled = false;
                 button1.Enabled = true;
                 button2.Enabled = false;        //przycisk połącz
-                button3.Enabled = true;    //przycisk rozłącz
-                button4.Enabled = true;
-                button5.Enabled = true;
-                button6.Enabled = true;
-                button7.Enabled = true;
-                button8.Enabled = true;
+                buttonRedOn.Enabled = true;    //przycisk rozłącz
+                buttonRedOff.Enabled = true;
+                buttonGreenOn.Enabled = true;
+                buttonGreenOff.Enabled = true;
+                buttonBlueOn.Enabled = true;
+                buttonBlueOff.Enabled = true;
 
 
             }
@@ -122,6 +122,28 @@ namespace RGBController
         private void button8_Click(object sender, EventArgs e)
         {
             serialPort.Write("6");
+        }
+
+        private void trackBarRed_Scroll(object sender, EventArgs e)
+        {
+           // serialPort.Write("Red");
+           serialPort.Write('r'+trackBarRed.Value.ToString());
+           labelRed.Text = "Red is : " + trackBarRed.Value;
+        
+        }
+
+        private void trackBarGreen_Scroll(object sender, EventArgs e)
+        {
+            //serialPort.Write("Green");
+            serialPort.Write('g'+trackBarGreen.Value.ToString());
+            labelGreen.Text = "Green is : " + trackBarGreen.Value;
+        }
+
+        private void trackBarBlue_Scroll(object sender, EventArgs e)
+        {
+            //serialPort.Write("Blue");
+            serialPort.Write('b'+trackBarBlue.Value.ToString());
+            labelBlue.Text = "Blue is : " + trackBarBlue.Value;
         }
     }
     }
