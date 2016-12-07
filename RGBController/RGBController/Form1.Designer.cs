@@ -1,6 +1,6 @@
 ﻿namespace RGBController
 {
-    partial class Form1
+    partial class RGBController
     {
         /// <summary>
         /// Required designer variable.
@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RGBController));
+            this.buttonDisconnect = new System.Windows.Forms.Button();
+            this.buttonConnect = new System.Windows.Forms.Button();
             this.buttonRedOn = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxPort = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.serialPort = new System.IO.Ports.SerialPort(this.components);
             this.buttonRedOff = new System.Windows.Forms.Button();
@@ -55,25 +55,25 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarBlue)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // buttonDisconnect
             // 
-            this.button1.Location = new System.Drawing.Point(243, 6);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Disconnect";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonDisconnect.Location = new System.Drawing.Point(243, 6);
+            this.buttonDisconnect.Name = "buttonDisconnect";
+            this.buttonDisconnect.Size = new System.Drawing.Size(75, 23);
+            this.buttonDisconnect.TabIndex = 0;
+            this.buttonDisconnect.Text = "Disconnect";
+            this.buttonDisconnect.UseVisualStyleBackColor = true;
+            this.buttonDisconnect.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // buttonConnect
             // 
-            this.button2.Location = new System.Drawing.Point(169, 6);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(56, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Connect";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.buttonConnect.Location = new System.Drawing.Point(169, 6);
+            this.buttonConnect.Name = "buttonConnect";
+            this.buttonConnect.Size = new System.Drawing.Size(56, 23);
+            this.buttonConnect.TabIndex = 1;
+            this.buttonConnect.Text = "Connect";
+            this.buttonConnect.UseVisualStyleBackColor = true;
+            this.buttonConnect.Click += new System.EventHandler(this.button2_Click);
             // 
             // buttonRedOn
             // 
@@ -83,15 +83,15 @@
             this.buttonRedOn.TabIndex = 2;
             this.buttonRedOn.Text = "On";
             this.buttonRedOn.UseVisualStyleBackColor = true;
-            this.buttonRedOn.Click += new System.EventHandler(this.button3_Click);
+            this.buttonRedOn.Click += new System.EventHandler(this.buttonRedOn_Click);
             // 
-            // comboBox1
+            // comboBoxPort
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(42, 6);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 5;
+            this.comboBoxPort.FormattingEnabled = true;
+            this.comboBoxPort.Location = new System.Drawing.Point(42, 6);
+            this.comboBoxPort.Name = "comboBoxPort";
+            this.comboBoxPort.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxPort.TabIndex = 5;
             // 
             // label1
             // 
@@ -114,7 +114,7 @@
             this.buttonRedOff.TabIndex = 8;
             this.buttonRedOff.Text = "Off";
             this.buttonRedOff.UseVisualStyleBackColor = true;
-            this.buttonRedOff.Click += new System.EventHandler(this.button4_Click);
+            this.buttonRedOff.Click += new System.EventHandler(this.buttonRedOff_Click);
             // 
             // buttonGreenOn
             // 
@@ -124,7 +124,7 @@
             this.buttonGreenOn.TabIndex = 9;
             this.buttonGreenOn.Text = "On";
             this.buttonGreenOn.UseVisualStyleBackColor = true;
-            this.buttonGreenOn.Click += new System.EventHandler(this.button5_Click);
+            this.buttonGreenOn.Click += new System.EventHandler(this.buttonGreenOn_Click);
             // 
             // buttonGreenOff
             // 
@@ -134,7 +134,7 @@
             this.buttonGreenOff.TabIndex = 10;
             this.buttonGreenOff.Text = "Off";
             this.buttonGreenOff.UseVisualStyleBackColor = true;
-            this.buttonGreenOff.Click += new System.EventHandler(this.button6_Click);
+            this.buttonGreenOff.Click += new System.EventHandler(this.buttonGreenOff_Click);
             // 
             // buttonBlueOn
             // 
@@ -144,7 +144,7 @@
             this.buttonBlueOn.TabIndex = 11;
             this.buttonBlueOn.Text = "On";
             this.buttonBlueOn.UseVisualStyleBackColor = true;
-            this.buttonBlueOn.Click += new System.EventHandler(this.button7_Click);
+            this.buttonBlueOn.Click += new System.EventHandler(this.buttonBlueOn_Click);
             // 
             // buttonBlueOff
             // 
@@ -154,7 +154,7 @@
             this.buttonBlueOff.TabIndex = 12;
             this.buttonBlueOff.Text = "Off";
             this.buttonBlueOff.UseVisualStyleBackColor = true;
-            this.buttonBlueOff.Click += new System.EventHandler(this.button8_Click);
+            this.buttonBlueOff.Click += new System.EventHandler(this.buttonBlueOff_Click);
             // 
             // trackBarRed
             // 
@@ -240,7 +240,7 @@
             this.label4.TabIndex = 21;
             this.label4.Text = " Blue value:";
             // 
-            // Form1
+            // RGBController
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -261,13 +261,13 @@
             this.Controls.Add(this.buttonGreenOn);
             this.Controls.Add(this.buttonRedOff);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.comboBoxPort);
             this.Controls.Add(this.buttonRedOn);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonConnect);
+            this.Controls.Add(this.buttonDisconnect);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "RGBController";
             this.Text = "RGB-Controller";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.trackBarRed)).EndInit();
@@ -280,10 +280,10 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonDisconnect;
+        private System.Windows.Forms.Button buttonConnect;
         private System.Windows.Forms.Button buttonRedOn;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxPort;
         private System.Windows.Forms.Label label1;
         private System.IO.Ports.SerialPort serialPort;
         private System.Windows.Forms.Button buttonRedOff;

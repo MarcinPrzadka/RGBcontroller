@@ -11,9 +11,9 @@ using System.IO.Ports;
 
 namespace RGBController
 {
-    public partial class Form1 : Form
+    public partial class RGBController : Form
     {
-        public Form1()
+        public RGBController()
         {
             InitializeComponent();
         }
@@ -21,24 +21,27 @@ namespace RGBController
         private void Form1_Load(object sender, EventArgs e)
         {
             //odczytanie dostępnych portów wraz z wpisanie ich do rozwijanej listy
-            comboBox1.Items.AddRange(SerialPort.GetPortNames());
+            comboBoxPort.Items.AddRange(SerialPort.GetPortNames());
 
             //sortowanie wyswietlanych nazw dostępnych portów
-            comboBox1.Sorted = true; 
+            comboBoxPort.Sorted = true; 
 
             //przypisanie wartosci domyslnych w rozwijanych listach wyboru
-            comboBox1.SelectedIndex = 0;   //pierwszy dostępny port
+            comboBoxPort.SelectedIndex = 0;   //pierwszy dostępny port
             
             //aktywacja i deaktywacja odpowiednich kontrolek
-            comboBox1.Enabled = true;   //lista z portami
-            button1.Enabled = false;    //przycisk wyślij
-            button2.Enabled = true;     //przycisk połącz
+            comboBoxPort.Enabled = true;   //lista z portami
+            buttonDisconnect.Enabled = false;    //przycisk wyślij
+            buttonConnect.Enabled = true;     //przycisk połącz
             buttonRedOn.Enabled = false;    //przycisk rozłącz
             buttonRedOff.Enabled = false;
             buttonGreenOn.Enabled = false;
             buttonGreenOff.Enabled = false;
             buttonBlueOn.Enabled = false;
             buttonBlueOff.Enabled = false;
+            trackBarBlue.Enabled = false;
+            trackBarGreen.Enabled = false;
+            trackBarRed.Enabled = false;
 
         }
 
@@ -49,15 +52,18 @@ namespace RGBController
                serialPort.Close(); //zamknięciu portu - odłączenie
 
                 //aktywacja i deaktywacja odpowiednich przyciskow
-                comboBox1.Enabled = true;  
-                button1.Enabled = true;    
-                button2.Enabled = true;    
-                buttonRedOn.Enabled = true;    
-                buttonRedOff.Enabled = true;
-                buttonGreenOn.Enabled = true;
-                buttonGreenOff.Enabled = true;
-                buttonBlueOn.Enabled = true;
-                buttonBlueOff.Enabled = true;
+                comboBoxPort.Enabled = true;   //lista z portami
+                buttonDisconnect.Enabled = false;    //przycisk wyślij
+                buttonConnect.Enabled = true; //przycisk połącz
+                buttonRedOn.Enabled = false;    //przycisk rozłącz
+                buttonRedOff.Enabled = false;
+                buttonGreenOn.Enabled = false;
+                buttonGreenOff.Enabled = false;
+                buttonBlueOn.Enabled = false;
+                buttonBlueOff.Enabled = false;
+                trackBarBlue.Enabled = false;
+                trackBarGreen.Enabled = false;
+                trackBarRed.Enabled = false;
             }
             catch
             {
@@ -72,19 +78,22 @@ namespace RGBController
             try //zabezpieczenie przed wystąpieniem wyjątku/problemu z otwarciem portu
             {
                 //otwarcie wybranego portu
-                serialPort.PortName = comboBox1.Text;
+                serialPort.PortName = comboBoxPort.Text;
                 serialPort.Open();
 
                 //aktywacja i deaktywacja odpowiednich kontrolerk
-                comboBox1.Enabled = false;
-                button1.Enabled = true;
-                button2.Enabled = false;        //przycisk połącz
+                comboBoxPort.Enabled = false;
+                buttonDisconnect.Enabled = true;
+                buttonConnect.Enabled = false;        //przycisk połącz
                 buttonRedOn.Enabled = true;    //przycisk rozłącz
                 buttonRedOff.Enabled = true;
                 buttonGreenOn.Enabled = true;
                 buttonGreenOff.Enabled = true;
                 buttonBlueOn.Enabled = true;
                 buttonBlueOff.Enabled = true;
+                trackBarBlue.Enabled = true;
+                trackBarGreen.Enabled = true;
+                trackBarRed.Enabled = true;
 
 
             }
@@ -92,36 +101,6 @@ namespace RGBController
             {
                 //jeżeli wystąpi błąd
             }
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            serialPort.Write("1");
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            serialPort.Write("4");
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            serialPort.Write("2");
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            serialPort.Write("5");
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            serialPort.Write("3");
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            serialPort.Write("6");
         }
 
         private void trackBarRed_Scroll(object sender, EventArgs e)
@@ -145,6 +124,37 @@ namespace RGBController
             serialPort.Write('b'+trackBarBlue.Value.ToString());
             labelBlue.Text = "Blue is : " + trackBarBlue.Value;
         }
+
+        private void buttonRedOn_Click(object sender, EventArgs e)
+        {
+            serialPort.Write("r100");
+        }
+
+        private void buttonRedOff_Click(object sender, EventArgs e)
+        {
+            serialPort.Write("r0");
+        }
+
+        private void buttonGreenOn_Click(object sender, EventArgs e)
+        {
+            serialPort.Write("g100");
+        }
+
+        private void buttonGreenOff_Click(object sender, EventArgs e)
+        {
+            serialPort.Write("g0");
+        }
+
+        private void buttonBlueOn_Click(object sender, EventArgs e)
+        {
+            serialPort.Write("b100");
+        }
+
+        private void buttonBlueOff_Click(object sender, EventArgs e)
+        {
+            serialPort.Write("b0");
+        }
+        
     }
     }
 
