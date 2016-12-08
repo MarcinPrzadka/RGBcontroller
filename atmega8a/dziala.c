@@ -7,7 +7,6 @@
 #include <util/delay.h>
 #include <avr/interrupt.h>
 
-
 void USART_Init( uint16_t baud){
 	UBRRH = (uint16_t)(baud>>8);
 	UBRRL = (uint16_t)baud;
@@ -42,8 +41,13 @@ ISR( TIMER2_COMP_vect ) // cia³o procedury obs³ugi przerwania Compare Match Time
 int main(void){
 
 	USART_Init(MYUBRR);
-	unsigned char data; 
-
+	unsigned char data;
+	
+	int z;
+	unsigned char *data1[z];
+	unsigned char data2[z-1];
+	
+	
 	//***** SPRZÊTOWY PWM - 1 KANA£ OC0 (PB2) *******
 	DDRB |= (1<<PB2); // ustawienie koñcówki OC0 (PB2) sprzêtowy PWM jako WYJŒCIE
 	TCCR0 |= (1<<WGM10)|(1<<WGM12);		// tryb Fast PWM
@@ -63,16 +67,28 @@ int main(void){
  	pwmR=0;
 	pwmG=0;
 	pwmB=0;
+	
 
 	while(1){
 		data = USART_Receive();
 		USART_Transmit(data);
-		if(data == '1' ) { if(pwmR != 255) pwmR=pwmR+5;}
+		z = sizeof(data);
+		*data1 = data;
+		for(int i = 1; i<=z ; i++) {data2[i-1]=*data1[i];}
+
+		/*if(data == '1' ) { if(pwmR != 255) pwmR=pwmR+5;}
 		if(data == '4' ) { if(pwmR != 0) pwmR=pwmR-5; }
 		if(data == '2' ) { if(pwmG != 255) pwmG=pwmG+5;}
 		if(data == '5' ) { if(pwmG != 0) pwmG=pwmG-5; }
 		if(data == '3' ) { if(pwmB != 255) pwmB=pwmB+5;}
-		if(data == '6' ) { if(pwmB != 0) pwmB=pwmB-5; }
+		if(data == '6' ) { if(pwmB != 0) pwmB=pwmB-5; } */	
+		
+		if( *data1 == 'r' )  pwmR=data2;
+		if( *data1 == 'g' )  pwmG=data2;  
+		if( *data1 == 'b' )  pwmB=data2;
+		if( data == 'c' )  pwmR=100;
+		
+
 		;
 		}
 }

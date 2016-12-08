@@ -3,25 +3,25 @@ dziala.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         000001a6  00000000  00000000  00000074  2**1
+  0 .text         00000180  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .bss          00000004  00800060  00800060  0000021a  2**0
+  1 .bss          00000004  00800060  00800060  000001f4  2**0
                   ALLOC
-  2 .debug_aranges 00000020  00000000  00000000  0000021a  2**0
+  2 .debug_aranges 00000020  00000000  00000000  000001f4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  3 .debug_pubnames 00000079  00000000  00000000  0000023a  2**0
+  3 .debug_pubnames 00000079  00000000  00000000  00000214  2**0
                   CONTENTS, READONLY, DEBUGGING
-  4 .debug_info   000001de  00000000  00000000  000002b3  2**0
+  4 .debug_info   00000239  00000000  00000000  0000028d  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_abbrev 00000141  00000000  00000000  00000491  2**0
+  5 .debug_abbrev 0000016a  00000000  00000000  000004c6  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_line   0000021a  00000000  00000000  000005d2  2**0
+  6 .debug_line   0000023b  00000000  00000000  00000630  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_frame  00000060  00000000  00000000  000007ec  2**2
+  7 .debug_frame  00000060  00000000  00000000  0000086c  2**2
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_str    000000dd  00000000  00000000  0000084c  2**0
+  8 .debug_str    000000e9  00000000  00000000  000008cc  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_loc    00000062  00000000  00000000  00000929  2**0
+  9 .debug_loc    00000018  00000000  00000000  000009b5  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -69,15 +69,15 @@ Disassembly of section .text:
   3e:	b1 07       	cpc	r27, r17
   40:	e1 f7       	brne	.-8      	; 0x3a <.do_clear_bss_loop>
   42:	39 d0       	rcall	.+114    	; 0xb6 <main>
-  44:	ae c0       	rjmp	.+348    	; 0x1a2 <_exit>
+  44:	9b c0       	rjmp	.+310    	; 0x17c <_exit>
 
 00000046 <__bad_interrupt>:
   46:	dc cf       	rjmp	.-72     	; 0x0 <__vectors>
 
 00000048 <USART_Init>:
+#include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
-
 
 void USART_Init( uint16_t baud){
 	UBRRH = (uint16_t)(baud>>8);
@@ -166,166 +166,180 @@ ISR( TIMER2_COMP_vect ) // cia³o procedury obs³ugi przerwania Compare Match Time
   b4:	18 95       	reti
 
 000000b6 <main>:
+
+
+int main(void){
+  b6:	0f 93       	push	r16
+  b8:	1f 93       	push	r17
+  ba:	df 93       	push	r29
+  bc:	cf 93       	push	r28
+  be:	cd b7       	in	r28, 0x3d	; 61
+  c0:	de b7       	in	r29, 0x3e	; 62
+#include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
 
-
 void USART_Init( uint16_t baud){
 	UBRRH = (uint16_t)(baud>>8);
-  b6:	10 bc       	out	0x20, r1	; 32
+  c2:	10 bc       	out	0x20, r1	; 32
 	UBRRL = (uint16_t)baud;
-  b8:	83 e3       	ldi	r24, 0x33	; 51
-  ba:	89 b9       	out	0x09, r24	; 9
+  c4:	83 e3       	ldi	r24, 0x33	; 51
+  c6:	89 b9       	out	0x09, r24	; 9
 	UCSRB = (1<<RXEN)|(1<<TXEN);
-  bc:	88 e1       	ldi	r24, 0x18	; 24
-  be:	8a b9       	out	0x0a, r24	; 10
+  c8:	88 e1       	ldi	r24, 0x18	; 24
+  ca:	8a b9       	out	0x0a, r24	; 10
 	UCSRC = (1<<URSEL)|(3<<UCSZ0);
-  c0:	86 e8       	ldi	r24, 0x86	; 134
-  c2:	80 bd       	out	0x20, r24	; 32
+  cc:	86 e8       	ldi	r24, 0x86	; 134
+  ce:	80 bd       	out	0x20, r24	; 32
 
 	USART_Init(MYUBRR);
-	unsigned char data; 
-
+	unsigned char data;
+	
+	int z;
+	unsigned char *data1[z];
+  d0:	6d b7       	in	r22, 0x3d	; 61
+  d2:	7e b7       	in	r23, 0x3e	; 62
+  d4:	6f 5f       	subi	r22, 0xFF	; 255
+  d6:	7f 4f       	sbci	r23, 0xFF	; 255
+	unsigned char data2[z-1];
+  d8:	0f 90       	pop	r0
+  da:	ad b7       	in	r26, 0x3d	; 61
+  dc:	be b7       	in	r27, 0x3e	; 62
+  de:	11 96       	adiw	r26, 0x01	; 1
+	
+	
 	//***** SPRZÊTOWY PWM - 1 KANA£ OC0 (PB2) *******
 	DDRB |= (1<<PB2); // ustawienie koñcówki OC0 (PB2) sprzêtowy PWM jako WYJŒCIE
-  c4:	ba 9a       	sbi	0x17, 2	; 23
+  e0:	ba 9a       	sbi	0x17, 2	; 23
 	TCCR0 |= (1<<WGM10)|(1<<WGM12);		// tryb Fast PWM
-  c6:	83 b7       	in	r24, 0x33	; 51
-  c8:	89 60       	ori	r24, 0x09	; 9
-  ca:	83 bf       	out	0x33, r24	; 51
+  e2:	83 b7       	in	r24, 0x33	; 51
+  e4:	89 60       	ori	r24, 0x09	; 9
+  e6:	83 bf       	out	0x33, r24	; 51
 	TCCR0 |= (1<<COM21);				// clear at TOP
-  cc:	83 b7       	in	r24, 0x33	; 51
-  ce:	80 62       	ori	r24, 0x20	; 32
-  d0:	83 bf       	out	0x33, r24	; 51
+  e8:	83 b7       	in	r24, 0x33	; 51
+  ea:	80 62       	ori	r24, 0x20	; 32
+  ec:	83 bf       	out	0x33, r24	; 51
 	TCCR0 |= (1<<CS00);					// preskaler = 1
-  d2:	83 b7       	in	r24, 0x33	; 51
-  d4:	81 60       	ori	r24, 0x01	; 1
-  d6:	83 bf       	out	0x33, r24	; 51
+  ee:	83 b7       	in	r24, 0x33	; 51
+  f0:	81 60       	ori	r24, 0x01	; 1
+  f2:	83 bf       	out	0x33, r24	; 51
 	OCR1A=255;							// wygaszenie diody w kanale PWM
-  d8:	8f ef       	ldi	r24, 0xFF	; 255
-  da:	90 e0       	ldi	r25, 0x00	; 0
-  dc:	9b bd       	out	0x2b, r25	; 43
-  de:	8a bd       	out	0x2a, r24	; 42
+  f4:	8f ef       	ldi	r24, 0xFF	; 255
+  f6:	90 e0       	ldi	r25, 0x00	; 0
+  f8:	9b bd       	out	0x2b, r25	; 43
+  fa:	8a bd       	out	0x2a, r24	; 42
 	DDRC |= (1<<PC0)|(1<<PC1)|(1<<PC2); // ustawienie pinów kana³ów programowych PWM jako WYJŒCIA
-  e0:	84 b3       	in	r24, 0x14	; 20
-  e2:	87 60       	ori	r24, 0x07	; 7
-  e4:	84 bb       	out	0x14, r24	; 20
+  fc:	84 b3       	in	r24, 0x14	; 20
+  fe:	87 60       	ori	r24, 0x07	; 7
+ 100:	84 bb       	out	0x14, r24	; 20
 	PORTC |= (1<<PC0)|(1<<PC1)|(1<<PC2); // wy³¹czenie diod LED pod³¹czonych katodami do wyjœæ
-  e6:	85 b3       	in	r24, 0x15	; 21
-  e8:	87 60       	ori	r24, 0x07	; 7
-  ea:	85 bb       	out	0x15, r24	; 21
+ 102:	85 b3       	in	r24, 0x15	; 21
+ 104:	87 60       	ori	r24, 0x07	; 7
+ 106:	85 bb       	out	0x15, r24	; 21
 	
 	TCCR2 |= (1<<WGM21);	// tryb  CTC
-  ec:	85 b5       	in	r24, 0x25	; 37
-  ee:	88 60       	ori	r24, 0x08	; 8
-  f0:	85 bd       	out	0x25, r24	; 37
+ 108:	85 b5       	in	r24, 0x25	; 37
+ 10a:	88 60       	ori	r24, 0x08	; 8
+ 10c:	85 bd       	out	0x25, r24	; 37
 	TCCR2 |= (1<<CS20);		// preskaler = 1
-  f2:	85 b5       	in	r24, 0x25	; 37
-  f4:	81 60       	ori	r24, 0x01	; 1
-  f6:	85 bd       	out	0x25, r24	; 37
+ 10e:	85 b5       	in	r24, 0x25	; 37
+ 110:	81 60       	ori	r24, 0x01	; 1
+ 112:	85 bd       	out	0x25, r24	; 37
 	OCR2 = 199;				// dodatkowy podzia³ czêsttotliwoœci przez 200
-  f8:	87 ec       	ldi	r24, 0xC7	; 199
-  fa:	83 bd       	out	0x23, r24	; 35
+ 114:	87 ec       	ldi	r24, 0xC7	; 199
+ 116:	83 bd       	out	0x23, r24	; 35
 	TIMSK |= (1<<OCIE2);	// zezwolenie na przerwanie CompareMatch
-  fc:	89 b7       	in	r24, 0x39	; 57
-  fe:	80 68       	ori	r24, 0x80	; 128
- 100:	89 bf       	out	0x39, r24	; 57
+ 118:	89 b7       	in	r24, 0x39	; 57
+ 11a:	80 68       	ori	r24, 0x80	; 128
+ 11c:	89 bf       	out	0x39, r24	; 57
 	sei();				// odblokowanie globalne przerwañ
- 102:	78 94       	sei
+ 11e:	78 94       	sei
 	uint8_t i;			// definicja zmiennej i na potrzeby pêtli for()
 
  	pwmR=0;
- 104:	10 92 62 00 	sts	0x0062, r1
+ 120:	10 92 62 00 	sts	0x0062, r1
 	pwmG=0;
- 108:	10 92 63 00 	sts	0x0063, r1
+ 124:	10 92 63 00 	sts	0x0063, r1
 	pwmB=0;
- 10c:	10 92 61 00 	sts	0x0061, r1
+ 128:	10 92 61 00 	sts	0x0061, r1
+		if(data == '2' ) { if(pwmG != 255) pwmG=pwmG+5;}
+		if(data == '5' ) { if(pwmG != 0) pwmG=pwmG-5; }
+		if(data == '3' ) { if(pwmB != 255) pwmB=pwmB+5;}
+		if(data == '6' ) { if(pwmB != 0) pwmB=pwmB-5; } */	
+		
+		if( *data1 == 'r' )  pwmR=data2;
+ 12c:	4a 2f       	mov	r20, r26
+		if( *data1 == 'g' )  pwmG=data2;  
+		if( *data1 == 'b' )  pwmB=data2;
+		if( data == 'c' )  pwmR=100;
+ 12e:	54 e6       	ldi	r21, 0x64	; 100
 	while( !(UCSRA & (1<<UDRE)) );
 	UDR = buflen;
 }
 	
 unsigned char USART_Receive( void ){
    while( !(UCSRA & (1<<RXC)) );
- 110:	5f 9b       	sbis	0x0b, 7	; 11
- 112:	fe cf       	rjmp	.-4      	; 0x110 <main+0x5a>
+ 130:	5f 9b       	sbis	0x0b, 7	; 11
+ 132:	fe cf       	rjmp	.-4      	; 0x130 <main+0x7a>
    return UDR;
- 114:	8c b1       	in	r24, 0x0c	; 12
+ 134:	9c b1       	in	r25, 0x0c	; 12
 	UCSRB = (1<<RXEN)|(1<<TXEN);
 	UCSRC = (1<<URSEL)|(3<<UCSZ0);
 }
 
 void USART_Transmit( char buflen) {
 	while( !(UCSRA & (1<<UDRE)) );
- 116:	5d 9b       	sbis	0x0b, 5	; 11
- 118:	fe cf       	rjmp	.-4      	; 0x116 <main+0x60>
+ 136:	5d 9b       	sbis	0x0b, 5	; 11
+ 138:	fe cf       	rjmp	.-4      	; 0x136 <main+0x80>
 	UDR = buflen;
- 11a:	8c b9       	out	0x0c, r24	; 12
-	pwmB=0;
+ 13a:	9c b9       	out	0x0c, r25	; 12
 
 	while(1){
 		data = USART_Receive();
 		USART_Transmit(data);
-		if(data == '1' ) { if(pwmR != 255) pwmR=pwmR+5;}
- 11c:	81 33       	cpi	r24, 0x31	; 49
- 11e:	41 f4       	brne	.+16     	; 0x130 <main+0x7a>
- 120:	80 91 62 00 	lds	r24, 0x0062
- 124:	8f 3f       	cpi	r24, 0xFF	; 255
- 126:	a1 f3       	breq	.-24     	; 0x110 <main+0x5a>
- 128:	80 91 62 00 	lds	r24, 0x0062
- 12c:	8b 5f       	subi	r24, 0xFB	; 251
- 12e:	09 c0       	rjmp	.+18     	; 0x142 <main+0x8c>
-		if(data == '4' ) { if(pwmR != 0) pwmR=pwmR-5; }
- 130:	84 33       	cpi	r24, 0x34	; 52
- 132:	51 f4       	brne	.+20     	; 0x148 <main+0x92>
- 134:	80 91 62 00 	lds	r24, 0x0062
- 138:	88 23       	and	r24, r24
- 13a:	51 f3       	breq	.-44     	; 0x110 <main+0x5a>
- 13c:	80 91 62 00 	lds	r24, 0x0062
- 140:	85 50       	subi	r24, 0x05	; 5
- 142:	80 93 62 00 	sts	0x0062, r24
- 146:	e4 cf       	rjmp	.-56     	; 0x110 <main+0x5a>
+		z = sizeof(data);
+		*data1 = data;
+ 13c:	29 2f       	mov	r18, r25
+ 13e:	30 e0       	ldi	r19, 0x00	; 0
+ 140:	fb 01       	movw	r30, r22
+ 142:	31 83       	std	Z+1, r19	; 0x01
+ 144:	20 83       	st	Z, r18
+		for(int i = 1; i<=z ; i++) {data2[i-1]=*data1[i];}
+ 146:	02 81       	ldd	r16, Z+2	; 0x02
+ 148:	13 81       	ldd	r17, Z+3	; 0x03
+ 14a:	f8 01       	movw	r30, r16
+ 14c:	80 81       	ld	r24, Z
+ 14e:	8c 93       	st	X, r24
 		if(data == '2' ) { if(pwmG != 255) pwmG=pwmG+5;}
- 148:	82 33       	cpi	r24, 0x32	; 50
- 14a:	41 f4       	brne	.+16     	; 0x15c <main+0xa6>
- 14c:	80 91 63 00 	lds	r24, 0x0063
- 150:	8f 3f       	cpi	r24, 0xFF	; 255
- 152:	f1 f2       	breq	.-68     	; 0x110 <main+0x5a>
- 154:	80 91 63 00 	lds	r24, 0x0063
- 158:	8b 5f       	subi	r24, 0xFB	; 251
- 15a:	09 c0       	rjmp	.+18     	; 0x16e <main+0xb8>
 		if(data == '5' ) { if(pwmG != 0) pwmG=pwmG-5; }
- 15c:	85 33       	cpi	r24, 0x35	; 53
- 15e:	51 f4       	brne	.+20     	; 0x174 <main+0xbe>
- 160:	80 91 63 00 	lds	r24, 0x0063
- 164:	88 23       	and	r24, r24
- 166:	a1 f2       	breq	.-88     	; 0x110 <main+0x5a>
- 168:	80 91 63 00 	lds	r24, 0x0063
- 16c:	85 50       	subi	r24, 0x05	; 5
- 16e:	80 93 63 00 	sts	0x0063, r24
- 172:	ce cf       	rjmp	.-100    	; 0x110 <main+0x5a>
 		if(data == '3' ) { if(pwmB != 255) pwmB=pwmB+5;}
- 174:	83 33       	cpi	r24, 0x33	; 51
- 176:	41 f4       	brne	.+16     	; 0x188 <main+0xd2>
- 178:	80 91 61 00 	lds	r24, 0x0061
- 17c:	8f 3f       	cpi	r24, 0xFF	; 255
- 17e:	41 f2       	breq	.-112    	; 0x110 <main+0x5a>
- 180:	80 91 61 00 	lds	r24, 0x0061
- 184:	8b 5f       	subi	r24, 0xFB	; 251
- 186:	0a c0       	rjmp	.+20     	; 0x19c <main+0xe6>
-		if(data == '6' ) { if(pwmB != 0) pwmB=pwmB-5; }
- 188:	86 33       	cpi	r24, 0x36	; 54
- 18a:	11 f6       	brne	.-124    	; 0x110 <main+0x5a>
- 18c:	80 91 61 00 	lds	r24, 0x0061
- 190:	88 23       	and	r24, r24
- 192:	09 f4       	brne	.+2      	; 0x196 <main+0xe0>
- 194:	bd cf       	rjmp	.-134    	; 0x110 <main+0x5a>
- 196:	80 91 61 00 	lds	r24, 0x0061
- 19a:	85 50       	subi	r24, 0x05	; 5
- 19c:	80 93 61 00 	sts	0x0061, r24
- 1a0:	b7 cf       	rjmp	.-146    	; 0x110 <main+0x5a>
+		if(data == '6' ) { if(pwmB != 0) pwmB=pwmB-5; } */	
+		
+		if( *data1 == 'r' )  pwmR=data2;
+ 150:	22 37       	cpi	r18, 0x72	; 114
+ 152:	31 05       	cpc	r19, r1
+ 154:	19 f4       	brne	.+6      	; 0x15c <main+0xa6>
+ 156:	40 93 62 00 	sts	0x0062, r20
+ 15a:	0b c0       	rjmp	.+22     	; 0x172 <main+0xbc>
+		if( *data1 == 'g' )  pwmG=data2;  
+ 15c:	27 36       	cpi	r18, 0x67	; 103
+ 15e:	31 05       	cpc	r19, r1
+ 160:	19 f4       	brne	.+6      	; 0x168 <main+0xb2>
+ 162:	40 93 63 00 	sts	0x0063, r20
+ 166:	05 c0       	rjmp	.+10     	; 0x172 <main+0xbc>
+		if( *data1 == 'b' )  pwmB=data2;
+ 168:	22 36       	cpi	r18, 0x62	; 98
+ 16a:	31 05       	cpc	r19, r1
+ 16c:	11 f4       	brne	.+4      	; 0x172 <main+0xbc>
+ 16e:	40 93 61 00 	sts	0x0061, r20
+		if( data == 'c' )  pwmR=100;
+ 172:	93 36       	cpi	r25, 0x63	; 99
+ 174:	e9 f6       	brne	.-70     	; 0x130 <main+0x7a>
+ 176:	50 93 62 00 	sts	0x0062, r21
+ 17a:	da cf       	rjmp	.-76     	; 0x130 <main+0x7a>
 
-000001a2 <_exit>:
- 1a2:	f8 94       	cli
+0000017c <_exit>:
+ 17c:	f8 94       	cli
 
-000001a4 <__stop_program>:
- 1a4:	ff cf       	rjmp	.-2      	; 0x1a4 <__stop_program>
+0000017e <__stop_program>:
+ 17e:	ff cf       	rjmp	.-2      	; 0x17e <__stop_program>
