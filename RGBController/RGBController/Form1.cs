@@ -50,6 +50,7 @@ namespace RGBController
             try //zabezpieczenie przed wystąpieniem wyjątku/problemu z zamknięciem portu
             {
                serialPort.Close(); //zamknięciu portu - odłączenie
+               labelStatus.Text = "Disconnected!";
 
                 //aktywacja i deaktywacja odpowiednich przyciskow
                 comboBoxPort.Enabled = true;   //lista z portami
@@ -67,7 +68,7 @@ namespace RGBController
             }
             catch
             {
-                //jeżeli wystąpi błąd
+                labelStatus.Text = "Error!"; //jeżeli wystąpi błąd
                
             }
     }
@@ -80,6 +81,7 @@ namespace RGBController
                 //otwarcie wybranego portu
                 serialPort.PortName = comboBoxPort.Text;
                 serialPort.Open();
+                labelStatus.Text = "Connected!";
 
                 //aktywacja i deaktywacja odpowiednich kontrolerk
                 comboBoxPort.Enabled = false;
@@ -99,7 +101,7 @@ namespace RGBController
             }
             catch
             {
-                //jeżeli wystąpi błąd
+                labelStatus.Text = "Error!"; //jeżeli wystąpi błąd
             }
         }
 
@@ -128,31 +130,43 @@ namespace RGBController
         private void buttonRedOn_Click(object sender, EventArgs e)
         {
             serialPort.Write("r100");
+            labelRed.Text = "Red is : 100";
+            trackBarRed.Value = 100;
         }
 
         private void buttonRedOff_Click(object sender, EventArgs e)
         {
             serialPort.Write("r0");
+            labelRed.Text = "Red is : 0";
+            trackBarRed.Value = 0;
         }
 
         private void buttonGreenOn_Click(object sender, EventArgs e)
         {
             serialPort.Write("g100");
+            labelGreen.Text = "Green is : 100";
+            trackBarGreen.Value = 100;
         }
 
         private void buttonGreenOff_Click(object sender, EventArgs e)
         {
             serialPort.Write("g0");
+            labelGreen.Text = "Green is : 0";
+            trackBarGreen.Value = 0;
         }
 
         private void buttonBlueOn_Click(object sender, EventArgs e)
         {
             serialPort.Write("b100");
+            labelBlue.Text = "Blue is : 100";
+            trackBarBlue.Value = 100;
         }
 
         private void buttonBlueOff_Click(object sender, EventArgs e)
         {
             serialPort.Write("b0");
+            labelBlue.Text = "Blue is : 0";
+            trackBarBlue.Value = 0;
         }
         
     }

@@ -50,6 +50,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.labelStatus = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarRed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarGreen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarBlue)).BeginInit();
@@ -240,12 +241,21 @@
             this.label4.TabIndex = 21;
             this.label4.Text = " Blue value:";
             // 
+            // labelStatus
+            // 
+            this.labelStatus.AutoSize = true;
+            this.labelStatus.Location = new System.Drawing.Point(324, 11);
+            this.labelStatus.Name = "labelStatus";
+            this.labelStatus.Size = new System.Drawing.Size(0, 13);
+            this.labelStatus.TabIndex = 22;
+            // 
             // RGBController
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(406, 240);
+            this.ClientSize = new System.Drawing.Size(400, 240);
+            this.Controls.Add(this.labelStatus);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -300,6 +310,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labelStatus;
     }
 }
 

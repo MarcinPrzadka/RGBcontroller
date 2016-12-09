@@ -7,3 +7,12 @@ c:\users\marcin\documents\visual studio 2015\Projects\RGBController\RGBControlle
 c:\users\marcin\documents\visual studio 2015\Projects\RGBController\RGBController\obj\Debug\RGBController.exe
 c:\users\marcin\documents\visual studio 2015\Projects\RGBController\RGBController\obj\Debug\RGBController.pdb
 C:\Users\Marcin\documents\visual studio 2015\Projects\RGBController\RGBController\obj\Debug\RGBController.RGBController.resources
+C:\Users\Student\Desktop\RGBcontroller\RGBController\RGBController\bin\Debug\RGBController.exe.config
+C:\Users\Student\Desktop\RGBcontroller\RGBController\RGBController\obj\Debug\RGBController.exe
+C:\Users\Student\Desktop\RGBcontroller\RGBController\RGBController\obj\Debug\RGBController.pdb
+C:\Users\Student\Desktop\RGBcontroller\RGBController\RGBController\bin\Debug\RGBController.exe
+C:\Users\Student\Desktop\RGBcontroller\RGBController\RGBController\bin\Debug\RGBController.pdb
+C:\Users\Student\Desktop\RGBcontroller\RGBController\RGBController\obj\Debug\RGBController.csprojResolveAssemblyReference.cache
+C:\Users\Student\Desktop\RGBcontroller\RGBController\RGBController\obj\Debug\RGBController.RGBController.resources
+C:\Users\Student\Desktop\RGBcontroller\RGBController\RGBController\obj\Debug\RGBController.Properties.Resources.resources
+C:\Users\Student\Desktop\RGBcontroller\RGBController\RGBController\obj\Debug\RGBController.csproj.GenerateResource.Cache
