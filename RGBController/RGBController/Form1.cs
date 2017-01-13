@@ -110,6 +110,7 @@ namespace RGBController
            // serialPort.Write("Red");
            serialPort.Write('r'+trackBarRed.Value.ToString());
            labelRed.Text = "Red is : " + trackBarRed.Value;
+           textBox1.BackColor = Color.FromArgb(trackBarRed.Value, trackBarGreen.Value, trackBarBlue.Value);
         
         }
 
@@ -118,6 +119,7 @@ namespace RGBController
             //serialPort.Write("Green");
             serialPort.Write('g'+trackBarGreen.Value.ToString());
             labelGreen.Text = "Green is : " + trackBarGreen.Value;
+            textBox1.BackColor = Color.FromArgb(trackBarRed.Value, trackBarGreen.Value, trackBarBlue.Value);
         }
 
         private void trackBarBlue_Scroll(object sender, EventArgs e)
@@ -125,13 +127,15 @@ namespace RGBController
             //serialPort.Write("Blue");
             serialPort.Write('b'+trackBarBlue.Value.ToString());
             labelBlue.Text = "Blue is : " + trackBarBlue.Value;
+            textBox1.BackColor = Color.FromArgb(trackBarRed.Value, trackBarGreen.Value, trackBarBlue.Value);
         }
 
         private void buttonRedOn_Click(object sender, EventArgs e)
         {
-            serialPort.Write("r100");
-            labelRed.Text = "Red is : 100";
-            trackBarRed.Value = 100;
+            serialPort.Write("r255");
+            labelRed.Text = "Red is : 255";
+            trackBarRed.Value = 255;
+            textBox1.BackColor = Color.FromArgb(trackBarRed.Value, trackBarGreen.Value, trackBarBlue.Value);
         }
 
         private void buttonRedOff_Click(object sender, EventArgs e)
@@ -139,13 +143,15 @@ namespace RGBController
             serialPort.Write("r0");
             labelRed.Text = "Red is : 0";
             trackBarRed.Value = 0;
+            textBox1.BackColor = Color.FromArgb(trackBarRed.Value, trackBarGreen.Value, trackBarBlue.Value);
         }
 
         private void buttonGreenOn_Click(object sender, EventArgs e)
         {
-            serialPort.Write("g100");
-            labelGreen.Text = "Green is : 100";
-            trackBarGreen.Value = 100;
+            serialPort.Write("g255");
+            labelGreen.Text = "Green is : 255";
+            trackBarGreen.Value = 255;
+            textBox1.BackColor = Color.FromArgb(trackBarRed.Value, trackBarGreen.Value, trackBarBlue.Value);
         }
 
         private void buttonGreenOff_Click(object sender, EventArgs e)
@@ -153,13 +159,15 @@ namespace RGBController
             serialPort.Write("g0");
             labelGreen.Text = "Green is : 0";
             trackBarGreen.Value = 0;
+            textBox1.BackColor = Color.FromArgb(trackBarRed.Value, trackBarGreen.Value, trackBarBlue.Value);
         }
 
         private void buttonBlueOn_Click(object sender, EventArgs e)
         {
-            serialPort.Write("b100");
-            labelBlue.Text = "Blue is : 100";
-            trackBarBlue.Value = 100;
+            serialPort.Write("b255");
+            labelBlue.Text = "Blue is : 255";
+            trackBarBlue.Value = 255;
+            textBox1.BackColor = Color.FromArgb(trackBarRed.Value, trackBarGreen.Value, trackBarBlue.Value);
         }
 
         private void buttonBlueOff_Click(object sender, EventArgs e)
@@ -167,7 +175,11 @@ namespace RGBController
             serialPort.Write("b0");
             labelBlue.Text = "Blue is : 0";
             trackBarBlue.Value = 0;
+            textBox1.BackColor = Color.FromArgb(trackBarRed.Value, trackBarGreen.Value, trackBarBlue.Value);
         }
+
+
+
         
     }
     }

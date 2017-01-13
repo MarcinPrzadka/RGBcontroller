@@ -51,6 +51,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.labelStatus = new System.Windows.Forms.Label();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarRed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarGreen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarBlue)).BeginInit();
@@ -249,12 +251,21 @@
             this.labelStatus.Size = new System.Drawing.Size(0, 13);
             this.labelStatus.TabIndex = 22;
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(279, 124);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 87);
+            this.textBox1.TabIndex = 23;
+            // 
             // RGBController
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(400, 240);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.labelStatus);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -311,6 +322,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label labelStatus;
+        private System.Windows.Forms.ColorDialog colorDialog1;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
