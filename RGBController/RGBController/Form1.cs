@@ -22,27 +22,17 @@ namespace RGBController
         {
             //odczytanie dostępnych portów wraz z wpisanie ich do rozwijanej listy
             comboBoxPort.Items.AddRange(SerialPort.GetPortNames());
-
             //sortowanie wyswietlanych nazw dostępnych portów
             comboBoxPort.Sorted = true; 
-
             //przypisanie wartosci domyslnych w rozwijanych listach wyboru
             comboBoxPort.SelectedIndex = 0;   //pierwszy dostępny port
-            
             //aktywacja i deaktywacja odpowiednich kontrolek
             comboBoxPort.Enabled = true;   //lista z portami
             buttonDisconnect.Enabled = false;    //przycisk wyślij
             buttonConnect.Enabled = true;     //przycisk połącz
-            buttonRedOn.Enabled = false;    //przycisk rozłącz
-            buttonRedOff.Enabled = false;
-            buttonGreenOn.Enabled = false;
-            buttonGreenOff.Enabled = false;
-            buttonBlueOn.Enabled = false;
-            buttonBlueOff.Enabled = false;
             trackBarBlue.Enabled = false;
             trackBarGreen.Enabled = false;
             trackBarRed.Enabled = false;
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -56,12 +46,6 @@ namespace RGBController
                 comboBoxPort.Enabled = true;   //lista z portami
                 buttonDisconnect.Enabled = false;    //przycisk wyślij
                 buttonConnect.Enabled = true; //przycisk połącz
-                buttonRedOn.Enabled = false;    //przycisk rozłącz
-                buttonRedOff.Enabled = false;
-                buttonGreenOn.Enabled = false;
-                buttonGreenOff.Enabled = false;
-                buttonBlueOn.Enabled = false;
-                buttonBlueOff.Enabled = false;
                 trackBarBlue.Enabled = false;
                 trackBarGreen.Enabled = false;
                 trackBarRed.Enabled = false;
@@ -87,17 +71,9 @@ namespace RGBController
                 comboBoxPort.Enabled = false;
                 buttonDisconnect.Enabled = true;
                 buttonConnect.Enabled = false;        //przycisk połącz
-                buttonRedOn.Enabled = true;    //przycisk rozłącz
-                buttonRedOff.Enabled = true;
-                buttonGreenOn.Enabled = true;
-                buttonGreenOff.Enabled = true;
-                buttonBlueOn.Enabled = true;
-                buttonBlueOff.Enabled = true;
                 trackBarBlue.Enabled = true;
                 trackBarGreen.Enabled = true;
                 trackBarRed.Enabled = true;
-
-
             }
             catch
             {
@@ -107,80 +83,28 @@ namespace RGBController
 
         private void trackBarRed_Scroll(object sender, EventArgs e)
         {
-           // serialPort.Write("Red");
            serialPort.Write('r'+trackBarRed.Value.ToString());
-           labelRed.Text = "Red is : " + trackBarRed.Value;
-           textBox1.BackColor = Color.FromArgb(trackBarRed.Value, trackBarGreen.Value, trackBarBlue.Value);
-        
+           textBoxMix.BackColor = Color.FromArgb(trackBarRed.Value, trackBarGreen.Value, trackBarBlue.Value);
+           textBoxRed.BackColor = Color.FromArgb(trackBarRed.Value, 0, 0);
+           textBoxRed.Text = trackBarRed.Value.ToString();
         }
 
         private void trackBarGreen_Scroll(object sender, EventArgs e)
         {
-            //serialPort.Write("Green");
             serialPort.Write('g'+trackBarGreen.Value.ToString());
-            labelGreen.Text = "Green is : " + trackBarGreen.Value;
-            textBox1.BackColor = Color.FromArgb(trackBarRed.Value, trackBarGreen.Value, trackBarBlue.Value);
+            textBoxMix.BackColor = Color.FromArgb(trackBarRed.Value, trackBarGreen.Value, trackBarBlue.Value);
+            textBoxGreen.BackColor = Color.FromArgb(0, trackBarGreen.Value, 0);
+            textBoxGreen.Text = trackBarGreen.Value.ToString();
         }
 
         private void trackBarBlue_Scroll(object sender, EventArgs e)
         {
-            //serialPort.Write("Blue");
             serialPort.Write('b'+trackBarBlue.Value.ToString());
-            labelBlue.Text = "Blue is : " + trackBarBlue.Value;
-            textBox1.BackColor = Color.FromArgb(trackBarRed.Value, trackBarGreen.Value, trackBarBlue.Value);
+            textBoxMix.BackColor = Color.FromArgb(trackBarRed.Value, trackBarGreen.Value, trackBarBlue.Value);
+            textBoxBlue.BackColor = Color.FromArgb(0,0,trackBarBlue.Value);
+            textBoxBlue.Text = trackBarBlue.Value.ToString();
         }
 
-        private void buttonRedOn_Click(object sender, EventArgs e)
-        {
-            serialPort.Write("r255");
-            labelRed.Text = "Red is : 255";
-            trackBarRed.Value = 255;
-            textBox1.BackColor = Color.FromArgb(trackBarRed.Value, trackBarGreen.Value, trackBarBlue.Value);
-        }
-
-        private void buttonRedOff_Click(object sender, EventArgs e)
-        {
-            serialPort.Write("r0");
-            labelRed.Text = "Red is : 0";
-            trackBarRed.Value = 0;
-            textBox1.BackColor = Color.FromArgb(trackBarRed.Value, trackBarGreen.Value, trackBarBlue.Value);
-        }
-
-        private void buttonGreenOn_Click(object sender, EventArgs e)
-        {
-            serialPort.Write("g255");
-            labelGreen.Text = "Green is : 255";
-            trackBarGreen.Value = 255;
-            textBox1.BackColor = Color.FromArgb(trackBarRed.Value, trackBarGreen.Value, trackBarBlue.Value);
-        }
-
-        private void buttonGreenOff_Click(object sender, EventArgs e)
-        {
-            serialPort.Write("g0");
-            labelGreen.Text = "Green is : 0";
-            trackBarGreen.Value = 0;
-            textBox1.BackColor = Color.FromArgb(trackBarRed.Value, trackBarGreen.Value, trackBarBlue.Value);
-        }
-
-        private void buttonBlueOn_Click(object sender, EventArgs e)
-        {
-            serialPort.Write("b255");
-            labelBlue.Text = "Blue is : 255";
-            trackBarBlue.Value = 255;
-            textBox1.BackColor = Color.FromArgb(trackBarRed.Value, trackBarGreen.Value, trackBarBlue.Value);
-        }
-
-        private void buttonBlueOff_Click(object sender, EventArgs e)
-        {
-            serialPort.Write("b0");
-            labelBlue.Text = "Blue is : 0";
-            trackBarBlue.Value = 0;
-            textBox1.BackColor = Color.FromArgb(trackBarRed.Value, trackBarGreen.Value, trackBarBlue.Value);
-        }
-
-
-
-        
+        private void textBoxMix_TextChanged(object sender, EventArgs e){ }
     }
     }
-

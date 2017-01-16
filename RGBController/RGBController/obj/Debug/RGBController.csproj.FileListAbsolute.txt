@@ -25,3 +25,12 @@ C:\Users\Student\Desktop\RGBcontroller-master\RGBController\RGBController\obj\De
 C:\Users\Student\Desktop\RGBcontroller-master\RGBController\RGBController\obj\Debug\RGBController.RGBController.resources
 C:\Users\Student\Desktop\RGBcontroller-master\RGBController\RGBController\obj\Debug\RGBController.Properties.Resources.resources
 C:\Users\Student\Desktop\RGBcontroller-master\RGBController\RGBController\obj\Debug\RGBController.csproj.GenerateResource.Cache
+C:\Users\Marcin\Desktop\atmega8a\RGBController\RGBController\bin\Debug\RGBController.exe.config
+C:\Users\Marcin\Desktop\atmega8a\RGBController\RGBController\bin\Debug\RGBController.exe
+C:\Users\Marcin\Desktop\atmega8a\RGBController\RGBController\bin\Debug\RGBController.pdb
+C:\Users\Marcin\Desktop\atmega8a\RGBController\RGBController\obj\Debug\RGBController.csprojResolveAssemblyReference.cache
+C:\Users\Marcin\Desktop\atmega8a\RGBController\RGBController\obj\Debug\RGBController.RGBController.resources
+C:\Users\Marcin\Desktop\atmega8a\RGBController\RGBController\obj\Debug\RGBController.Properties.Resources.resources
+C:\Users\Marcin\Desktop\atmega8a\RGBController\RGBController\obj\Debug\RGBController.csproj.GenerateResource.Cache
+C:\Users\Marcin\Desktop\atmega8a\RGBController\RGBController\obj\Debug\RGBController.exe
+C:\Users\Marcin\Desktop\atmega8a\RGBController\RGBController\obj\Debug\RGBController.pdb
