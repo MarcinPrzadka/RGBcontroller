@@ -7,8 +7,7 @@
 #include <util/delay.h>
 #include <avr/interrupt.h>
 
-char t[20];
-int p = 0;
+
 extern volatile uint8_t pwmR, pwmG, pwmB;
 
 void USART_Init( uint16_t baud){
@@ -24,21 +23,28 @@ void USART_Transmit( char buflen) {
 }
 	
 unsigned char USART_Receive( void ){
-    while( !(UCSRA & (1<<RXC)) );
-    if(UDR >= ' '){
-   		t[p] = UDR;
-		p=p+1;
-		t[p] = '\0';
-		}
-	if(UDR == '\r'){
-		if(strncmp(t, "r ",2) == 0) pwmR = t[2] - '0'; 
-		if(strncmp(t, "g ",2) == 0) pwmG = t[2] - '0'; 
-		if(strncmp(t, "b ",2) == 0) pwmB = t[2] - '0'; 
-		if(t[0] == "r") pwmR = 200;
-		}
-	p = 0;
-	t[p] = '\0';
-	return UDR;
+    
+	unsigned char m;
+	char t[10];
+	int p = 0;
+//	do{
+		while( !(UCSRA & (1<<RXC)) );
+	 //	if(UDR >= ' '){
+   	//		t[p] = UDR;
+	//		p=p+1;
+	//		t[p] = '\0';
+	//	}
+//	}while(UDR != '\r');
+	
+	if(strncmp(t, "r",1) == 0) pwmR = t[2] - '0'; 
+//	if(strncmp(t, "g ",2) == 0) pwmG = t[2] - '0'; 
+//	if(strncmp(t, "b ",2) == 0) pwmB = t[2] - '0'; 
+//	if(t[0] == "r") pwmR = 200;
+		
+	return UDR; 
+
+	
+
 }
 
 volatile uint8_t pwmR, pwmG, pwmB;
@@ -59,6 +65,7 @@ int main(void){
 
 	USART_Init(MYUBRR);
 	unsigned char data;
+	unsigned size[10];
 	
 	//***** SPRZÊTOWY PWM - 1 KANA£ OC0 (PB2) *******
 	DDRB |= (1<<PB2); // ustawienie koñcówki OC0 (PB2) sprzêtowy PWM jako WYJŒCIE
@@ -86,4 +93,5 @@ int main(void){
 			
 		}
 }
+
 
