@@ -23,7 +23,7 @@ namespace RGBController
             //odczytanie dostępnych portów wraz z wpisanie ich do rozwijanej listy
             comboBoxPort.Items.AddRange(SerialPort.GetPortNames());
             //sortowanie wyswietlanych nazw dostępnych portów
-            comboBoxPort.Sorted = true; 
+            comboBoxPort.Sorted = true;
             //przypisanie wartosci domyslnych w rozwijanych listach wyboru
             comboBoxPort.SelectedIndex = 0;   //pierwszy dostępny port
             //aktywacja i deaktywacja odpowiednich kontrolek
@@ -35,12 +35,52 @@ namespace RGBController
             trackBarRed.Enabled = false;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void trackBarRed_Scroll(object sender, EventArgs e)
         {
+            DataCheck("Red");
+        }
+
+        private void trackBarGreen_Scroll(object sender, EventArgs e)
+        {
+            DataCheck("Green");     }
+
+        private void trackBarBlue_Scroll(object sender, EventArgs e)
+        {
+            DataCheck("Blue");
+        }
+
+        private void textBoxMix_TextChanged(object sender, EventArgs e){ }
+
+        private void DataCheck(string Data) {
+            if(Data == "Red")
+            {
+                serialPort.Write('r' + trackBarRed.Value.ToString());
+                textBoxMix.BackColor = Color.FromArgb(trackBarRed.Value, trackBarGreen.Value, trackBarBlue.Value);
+                textBoxRed.BackColor = Color.FromArgb(trackBarRed.Value, 0, 0);
+                textBoxRed.Text = trackBarRed.Value.ToString();
+            }
+            if(Data == "Green")
+            {
+                serialPort.Write('g' + trackBarGreen.Value.ToString());
+                textBoxMix.BackColor = Color.FromArgb(trackBarRed.Value, trackBarGreen.Value, trackBarBlue.Value);
+                textBoxGreen.BackColor = Color.FromArgb(0, trackBarGreen.Value, 0);
+                textBoxGreen.Text = trackBarGreen.Value.ToString();
+            }
+            if(Data == "Blue")
+            {
+                serialPort.Write('b' + trackBarBlue.Value.ToString());
+                textBoxMix.BackColor = Color.FromArgb(trackBarRed.Value, trackBarGreen.Value, trackBarBlue.Value);
+                textBoxBlue.BackColor = Color.FromArgb(0, 0, trackBarBlue.Value);
+                textBoxBlue.Text = trackBarBlue.Value.ToString();
+            }
+        }
+
+        private void buttonDisconnect_Click(object sender, EventArgs e) {
+
             try //zabezpieczenie przed wystąpieniem wyjątku/problemu z zamknięciem portu
             {
-               serialPort.Close(); //zamknięciu portu - odłączenie
-               labelStatus.Text = "Disconnected!";
+                serialPort.Close(); //zamknięciu portu - odłączenie
+                labelStatus.Text = "Disconnected!";
 
                 //aktywacja i deaktywacja odpowiednich przyciskow
                 comboBoxPort.Enabled = true;   //lista z portami
@@ -52,14 +92,13 @@ namespace RGBController
             }
             catch
             {
-                labelStatus.Text = "Error!"; //jeżeli wystąpi błąd
-               
+                labelStatus.Text = "Error!"; //jeżeli wystąpi błąd}
             }
-    }
 
-        private void button2_Click(object sender, EventArgs e)
+        }
+
+        private void buttonConnect_Click(object sender, EventArgs e)
         {
-
             try //zabezpieczenie przed wystąpieniem wyjątku/problemu z otwarciem portu
             {
                 //otwarcie wybranego portu
@@ -80,31 +119,5 @@ namespace RGBController
                 labelStatus.Text = "Error!"; //jeżeli wystąpi błąd
             }
         }
-
-        private void trackBarRed_Scroll(object sender, EventArgs e)
-        {
-           serialPort.Write('r'+trackBarRed.Value.ToString());
-           textBoxMix.BackColor = Color.FromArgb(trackBarRed.Value, trackBarGreen.Value, trackBarBlue.Value);
-           textBoxRed.BackColor = Color.FromArgb(trackBarRed.Value, 0, 0);
-           textBoxRed.Text = trackBarRed.Value.ToString();
-        }
-
-        private void trackBarGreen_Scroll(object sender, EventArgs e)
-        {
-            serialPort.Write('g'+trackBarGreen.Value.ToString());
-            textBoxMix.BackColor = Color.FromArgb(trackBarRed.Value, trackBarGreen.Value, trackBarBlue.Value);
-            textBoxGreen.BackColor = Color.FromArgb(0, trackBarGreen.Value, 0);
-            textBoxGreen.Text = trackBarGreen.Value.ToString();
-        }
-
-        private void trackBarBlue_Scroll(object sender, EventArgs e)
-        {
-            serialPort.Write('b'+trackBarBlue.Value.ToString());
-            textBoxMix.BackColor = Color.FromArgb(trackBarRed.Value, trackBarGreen.Value, trackBarBlue.Value);
-            textBoxBlue.BackColor = Color.FromArgb(0,0,trackBarBlue.Value);
-            textBoxBlue.Text = trackBarBlue.Value.ToString();
-        }
-
-        private void textBoxMix_TextChanged(object sender, EventArgs e){ }
     }
-    }
+}
